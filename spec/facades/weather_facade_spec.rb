@@ -9,8 +9,8 @@ describe WeatherFacade do
 
         expect(response).to be_a(Forecast)
         expect(response.id).to eq(nil)
-        expect(response.keys).to eq([:current_weather, :daily_weather, :hourly_weather])
-        expect(response.keys).to_not include(:location, :current, :forecast)
+        expect(response.instance_variables).to eq([:@current_weather, :@daily_weather, :@hourly_weather])
+        expect(response.instance_variables).to_not include(:@location, :@current, :@forecast)
 
         expect(response.current_weather).to be_a(Hash)
         expect(response.current_weather.size).to eq(8)
