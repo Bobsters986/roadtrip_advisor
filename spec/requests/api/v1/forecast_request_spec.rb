@@ -16,10 +16,17 @@ RSpec.describe 'Forecast API' do
         expect(forecast[:data][:type]).to eq('forecast')
         expect(forecast[:data][:attributes].keys).to eq([:current_weather, :daily_weather, :hourly_weather])
         expect(forecast[:data][:attributes][:current_weather]).to be_a(Hash)
+        expect(forecast[:data][:attributes][:current_weather].size).to eq(8)
+
         expect(forecast[:data][:attributes][:daily_weather]).to be_an(Array)
-        expect(forecast[:data][:attributes][:daily_weather].size).to eq(5)
+        expect(forecast[:data][:attributes][:daily_weather].size).to eq(5) #5 days of forecast
+        expect(forecast[:data][:attributes][:daily_weather][0]).to be_a(Hash)
+        expect(forecast[:data][:attributes][:daily_weather][0].size).to eq(7)
+
         expect(forecast[:data][:attributes][:hourly_weather]).to be_an(Array)
-        expect(forecast[:data][:attributes][:hourly_weather].size).to eq(24)
+        expect(forecast[:data][:attributes][:hourly_weather].size).to eq(24) #24 hours of forecast
+        expect(forecast[:data][:attributes][:hourly_weather][0]).to be_a(Hash)
+        expect(forecast[:data][:attributes][:hourly_weather][0].size).to eq(4)
       end
     end
   end
