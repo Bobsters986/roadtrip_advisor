@@ -11,7 +11,7 @@ RSpec.describe Forecast do
         humidity: 40,
         uvi: 3.0,
         visibility: 9.0,
-        conditions: "Sunny",
+        condition: "Sunny",
         icon: "//cdn.weatherapi.com/weather/64x64/day/116.png"
       }
 
@@ -22,7 +22,7 @@ RSpec.describe Forecast do
           sunset: "07:30 PM",
           max_temp: 61.7,
           min_temp: 32.0,
-          conditions: "Sunny",
+          condition: "Sunny",
           icon: "//cdn.weatherapi.com/weather/64x64/day/116.png"
         },
         {
@@ -31,7 +31,7 @@ RSpec.describe Forecast do
           sunset: "07:31 PM",
           max_temp: 60.5,
           min_temp: 34.0,
-          conditions: "Sunny",
+          condition: "Sunny",
           icon: "//cdn.weatherapi.com/weather/64x64/day/118.png"
         },
         {
@@ -40,7 +40,7 @@ RSpec.describe Forecast do
           sunset: "07:32 PM",
           max_temp: 60.3,
           min_temp: 33.0,
-          conditions: "Cloudy",
+          condition: "Cloudy",
           icon: "//cdn.weatherapi.com/weather/64x64/day/120.png"
         },
         {
@@ -49,7 +49,7 @@ RSpec.describe Forecast do
           sunset: "07:33 PM",
           max_temp: 60.1,
           min_temp: 33.0,
-          conditions: "Partly cloudy",
+          condition: "Partly cloudy",
           icon: "//cdn.weatherapi.com/weather/64x64/day/122.png"
         },
         {
@@ -58,7 +58,7 @@ RSpec.describe Forecast do
           sunset: "07:34 PM",
           max_temp: 60.0,
           min_temp: 32.0,
-          conditions: "Sunny",
+          condition: "Sunny",
           icon: "//cdn.weatherapi.com/weather/64x64/day/116.png"
         }
       ]
@@ -102,7 +102,7 @@ RSpec.describe Forecast do
       expect(forecast.current_weather[:humidity]).to be_a(Integer)
       expect(forecast.current_weather[:uvi]).to be_a(Float)
       expect(forecast.current_weather[:visibility]).to be_a(Float)
-      expect(forecast.current_weather[:conditions]).to be_a(String)
+      expect(forecast.current_weather[:condition]).to be_a(String)
       expect(forecast.current_weather[:icon]).to be_a(String)
 
       expect(forecast.daily_weather).to be_a(Array)
@@ -114,7 +114,7 @@ RSpec.describe Forecast do
       expect(forecast.daily_weather[0][:sunset]).to be_a(String)
       expect(forecast.daily_weather[0][:max_temp]).to be_a(Float)
       expect(forecast.daily_weather[0][:min_temp]).to be_a(Float)
-      expect(forecast.daily_weather[0][:conditions]).to be_a(String)
+      expect(forecast.daily_weather[0][:condition]).to be_a(String)
       expect(forecast.daily_weather[0][:icon]).to be_a(String)
 
       expect(forecast.hourly_weather).to be_a(Array)

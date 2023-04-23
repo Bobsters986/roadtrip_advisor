@@ -13,7 +13,7 @@ class WeatherFacade
       humidity: weather_data[:current][:humidity],
       uvi: weather_data[:current][:uv],
       visibility: weather_data[:current][:vis_miles],
-      conditions: weather_data[:current][:condition][:text],
+      condition: weather_data[:current][:condition][:text],
       icon: weather_data[:current][:condition][:icon]
     }
 
@@ -23,7 +23,7 @@ class WeatherFacade
         sunset: day[:astro][:sunset],
         max_temp: day[:day][:maxtemp_f],
         min_temp: day[:day][:mintemp_f],
-        conditions: day[:day][:condition][:text],
+        condition: day[:day][:condition][:text],
         icon: day[:day][:condition][:icon]
       }
     end

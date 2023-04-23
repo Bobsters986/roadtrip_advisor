@@ -14,14 +14,14 @@ describe WeatherFacade do
 
         expect(response.current_weather).to be_a(Hash)
         expect(response.current_weather.size).to eq(8)
-        expect(response.current_weather.keys).to eq([:last_updated, :temperature, :feels_like, :humidity, :uvi, :visibility, :conditions, :icon])
+        expect(response.current_weather.keys).to eq([:last_updated, :temperature, :feels_like, :humidity, :uvi, :visibility, :condition, :icon])
         expect(response.current_weather.keys).to_not include(:last_updated_epoch, :wind_speed, :wind_direction, :pressure, :precip, :cloud, :feelslike_c, :temp_c)
 
         expect(response.daily_weather).to be_an(Array)
         expect(response.daily_weather.size).to eq(5)
         expect(response.daily_weather[0]).to be_a(Hash)
         expect(response.daily_weather[0].size).to eq(7)
-        expect(response.daily_weather[0].keys).to eq([:date, :sunrise, :sunset, :max_temp, :min_temp, :conditions, :icon])
+        expect(response.daily_weather[0].keys).to eq([:date, :sunrise, :sunset, :max_temp, :min_temp, :condition, :icon])
         expect(response.daily_weather[0].keys).to_not include(:date_epoch, :astro, :avgtemp_, :maxwind_mph, :daily_chance_of_rain, :daily_will_it_snow, :uv)
 
         expect(response.hourly_weather).to be_an(Array)
