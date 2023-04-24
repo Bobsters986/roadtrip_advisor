@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 describe TeleportService do
-  describe "#get_salaries" do
-    it "returns salaries for a location, Chicago" do
+  describe ".get_salaries" do
+    it "returns salaries for a location, chicago" do
       VCR.use_cassette("teleport_chicago_salaries") do
         destination = "chicago"
         response = TeleportService.get_salaries(destination)
