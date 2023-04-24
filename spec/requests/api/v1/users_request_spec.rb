@@ -7,7 +7,7 @@ RSpec.describe 'Users API' do
     let!(:user_3) { User.create(email: 'jake@fake.com', password: 'password3', password_confirmation: 'password3') }
 
     context 'when successful' do
-      it 'creates a user' do
+      it 'creates a user and an api key for them' do
         expect(User.count).to eq(3)
 
         user_params = {
@@ -16,7 +16,7 @@ RSpec.describe 'Users API' do
           password_confirmation: 'password4'
         }
 
-        headers = { 'CONTENT_TYPE' => 'application/json' }
+        headers = { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
 
         post '/api/v1/users', headers: headers, params: user_params, as: :json
         new_user = User.last
@@ -50,7 +50,7 @@ RSpec.describe 'Users API' do
           password_confirmation: 'password4'
         }
 
-        headers = { 'CONTENT_TYPE' => 'application/json' }
+        headers = { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
 
         post '/api/v1/users', headers: headers, params: duplicate_params, as: :json
         parsed = JSON.parse(response.body, symbolize_names: true)
@@ -69,7 +69,7 @@ RSpec.describe 'Users API' do
           password_confirmation: 'password5'
         }
 
-        headers = { 'CONTENT_TYPE' => 'application/json' }
+        headers = { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
 
         post '/api/v1/users', headers: headers, params: mismatched_params, as: :json
         parsed = JSON.parse(response.body, symbolize_names: true)
@@ -88,7 +88,7 @@ RSpec.describe 'Users API' do
           password_confirmation: ' '
         }
 
-        headers = { 'CONTENT_TYPE' => 'application/json' }
+        headers = { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
 
         post '/api/v1/users', headers: headers, params: missing_params, as: :json
         parsed = JSON.parse(response.body, symbolize_names: true)
