@@ -2,11 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'Users API' do
   context '#create' do
-    before do
-      user_1 = User.create(email: 'john@fake.com', password: 'password', password_confirmation: 'password')
-      user_2 = User.create(email: 'jim@fake.com', password: 'password2', password_confirmation: 'password2')
-      user_3 = User.create(email: 'jake@fake.com', password: 'password3', password_confirmation: 'password3')
-    end
+    let!(:user_1) { User.create(email: 'john@fake.com', password: 'password', password_confirmation: 'password') }
+    let!(:user_2) { User.create(email: 'jim@fake.com', password: 'password2', password_confirmation: 'password2') }
+    let!(:user_3) { User.create(email: 'jake@fake.com', password: 'password3', password_confirmation: 'password3') }
 
     context 'when successful' do
       it 'creates a user' do
@@ -36,6 +34,9 @@ RSpec.describe 'Users API' do
         expect(user[:data][:attributes].keys).to eq([:email, :api_key])
         expect(user[:data][:attributes][:email]).to eq(new_user.email)
         expect(user[:data][:attributes][:api_key]).to eq(new_user.api_key)
+        expect(user[:data][:attributes][:api_key]).to_not eq(user_1.api_key)
+        expect(user[:data][:attributes][:api_key]).to_not eq(user_2.api_key)
+        expect(user[:data][:attributes][:api_key]).to_not eq(user_3.api_key)
       end
     end
 
