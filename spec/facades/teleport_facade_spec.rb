@@ -19,6 +19,7 @@ describe TeleportFacade do
         expect(response.forecast[:temperature]).to be_a(String)
 
         expect(response.salaries).to be_an(Array)
+        expect(response.salaries.size).to eq(7)
         expect(response.salaries[0]).to be_a(Hash)
         expect(response.salaries[0].keys).to eq([:title, :min, :max])
         expect(response.salaries[0][:title]).to be_a(String)
