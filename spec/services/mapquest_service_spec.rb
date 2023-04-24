@@ -8,6 +8,7 @@ describe MapquestService do
         response = MapquestService.get_coordinates(location)
 
         expect(response).to be_a(Hash)
+        expect(response[:results][0][:providedLocation][:location]).to eq("Denver,CO")
         expect(response[:results][0][:locations][0][:latLng]).to have_key(:lat)
         expect(response[:results][0][:locations][0][:latLng]).to have_key(:lng)
         expect(response[:results][0][:locations][0][:latLng][:lat]).to be_a(Float)
@@ -23,6 +24,7 @@ describe MapquestService do
         response = MapquestService.get_coordinates(location)
 
         expect(response).to be_a(Hash)
+        expect(response[:results][0][:providedLocation][:location]).to eq("Los Angeles,CA")
         expect(response[:results][0][:locations][0][:latLng]).to have_key(:lat)
         expect(response[:results][0][:locations][0][:latLng]).to have_key(:lng)
         expect(response[:results][0][:locations][0][:latLng][:lat]).to be_a(Float)
