@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       resources :forecast, only: [:index]
       resources :users, only: [:create]
 
-      get '/salaries', to: 'salaries#index'
+      get '/salaries', to: 'salaries#show'
     end
   end
 end
