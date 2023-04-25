@@ -27,4 +27,48 @@ describe RoadTripFacade do
       end
     end
   end
+
+  describe "#days_of_travel" do #if less than the next 24 hour increment, rounds down
+    it "returns days of travel, NY to LA" do
+      VCR.use_cassette("days_of_travel/la_road_trip_facade_days_of_travel") do
+        origin = "New York,NY"
+        destination = "Los Angeles,CA"
+        travel_time = MapquestService.get_travel_info(origin, destination)[:route][:formattedTime]
+        expect(travel_time).to eq("40:16:11")
+
+        road_trip_days = RoadTripFacade.new(origin, destination).days_of_travel(travel_time)
+
+        expect(road_trip_days).to be_an(Integer)
+        expect(road_trip_days).to eq(1)
+      end
+    end
+
+    it "returns days of travel, New York,NY to Panama City,Panama" do
+      VCR.use_cassette("days_of_travel/panama_road_trip_facade_days_of_travel") do
+        origin = "New York,NY"
+        destination = "Panama City,Panama"
+        travel_time = MapquestService.get_travel_info(origin, destination)[:route][:formattedTime]
+        expect(travel_time).to eq("80:30:17")
+
+        road_trip_days = RoadTripFacade.new(origin, destination).days_of_travel(travel_time)
+
+        expect(road_trip_days).to be_an(Integer)
+        expect(road_trip_days).to eq(3)
+      end
+    end
+
+    it "returns days of travel, Denver,CO to Pueblo,CO" do #if less than 24 hours, days of travel is 0
+      VCR.use_cassette("days_of_travel/pueblo_road_trip_facade_days_of_travel") do
+        origin = "Denver,CO"
+        destination = "Pueblo,CO"
+        travel_time = MapquestService.get_travel_info(origin, destination)[:route][:formattedTime]
+        expect(travel_time).to eq("01:43:10")
+
+        road_trip_days = RoadTripFacade.new(origin, destination).days_of_travel(travel_time)
+
+        expect(road_trip_days).to be_an(Integer)
+        expect(road_trip_days).to eq(0)
+      end
+    end
+  end
 end
