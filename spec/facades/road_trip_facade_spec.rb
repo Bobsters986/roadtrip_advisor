@@ -141,4 +141,76 @@ describe RoadTripFacade do
     end
   end
 
+  describe "#new_adventure" do
+    it "returns a road trip object with specific attributes, NY to LA" do
+      VCR.use_cassette("new_adventure/la_road_trip_facade_new_adventure") do
+        origin = "New York,NY"
+        destination = "Los Angeles,CA"
+
+        road_trip = RoadTripFacade.new(origin, destination).new_adventure
+
+        expect(road_trip).to be_a(RoadTrip)
+        expect(road_trip.id).to eq(nil)
+        expect(road_trip.start_city).to be_a(String)
+        expect(road_trip.start_city).to eq("New York,NY")
+        expect(road_trip.end_city).to be_a(String)
+        expect(road_trip.end_city).to eq("Los Angeles,CA")
+        expect(road_trip.travel_time).to be_a(String)
+        expect(road_trip.travel_time).to eq("40:13:49")
+        expect(road_trip.weather_at_eta).to be_a(Hash)
+        expect(road_trip.weather_at_eta.keys).to eq([:datetime, :temperature, :condition])
+        expect(road_trip.weather_at_eta[:datetime]).to be_a(String)
+        expect(road_trip.weather_at_eta[:datetime]).to eq("2023-04-27 11:00")
+        expect(road_trip.weather_at_eta[:temperature]).to be_a(Float)
+        expect(road_trip.weather_at_eta[:temperature]).to eq(81.1)
+        expect(road_trip.weather_at_eta[:condition]).to be_a(String)
+        expect(road_trip.weather_at_eta[:condition]).to eq("Sunny")
+      end
+    end
+
+    it "returns a road trip object with specific attributes, New York,NY to Panama City,Panama" do
+      VCR.use_cassette("new_adventure/panama_road_trip_facade_new_adventure") do
+        origin = "New York,NY"
+        destination = "Panama City,Panama"
+
+        road_trip = RoadTripFacade.new(origin, destination).new_adventure
+
+        expect(road_trip).to be_a(RoadTrip)
+        expect(road_trip.id).to eq(nil)
+        expect(road_trip.start_city).to be_a(String)
+        expect(road_trip.start_city).to eq("New York,NY")
+        expect(road_trip.end_city).to be_a(String)
+        expect(road_trip.end_city).to eq("Panama City,Panama")
+        expect(road_trip.travel_time).to be_a(String)
+        expect(road_trip.travel_time).to eq("80:31:59")
+        expect(road_trip.weather_at_eta).to be_a(Hash)
+        expect(road_trip.weather_at_eta.keys).to eq([:datetime, :temperature, :condition])
+        expect(road_trip.weather_at_eta[:datetime]).to be_a(String)
+        expect(road_trip.weather_at_eta[:datetime]).to eq("2023-04-29 03:00")
+        expect(road_trip.weather_at_eta[:temperature]).to be_a(Float)
+        expect(road_trip.weather_at_eta[:temperature]).to eq(75.2)
+        expect(road_trip.weather_at_eta[:condition]).to be_a(String)
+        expect(road_trip.weather_at_eta[:condition]).to eq("Partly cloudy")
+      end
+    end
+
+    it "returns a road trip object with impossible travel time, New York,NY to London,UK" do
+      VCR.use_cassette("new_adventure/london_road_trip_facade_new_adventure") do
+        origin = "New York,NY"
+        destination = "London,UK"
+
+        road_trip = RoadTripFacade.new(origin, destination).new_adventure
+
+        expect(road_trip).to be_a(RoadTrip)
+        expect(road_trip.id).to eq(nil)
+        expect(road_trip.start_city).to be_a(String)
+        expect(road_trip.start_city).to eq("New York,NY")
+        expect(road_trip.end_city).to be_a(String)
+        expect(road_trip.end_city).to eq("London,UK")
+        expect(road_trip.travel_time).to be_a(String)
+        expect(road_trip.travel_time).to eq("Impossible Route")
+        expect(road_trip.weather_at_eta).to eq({})
+      end
+    end
+  end
 end
