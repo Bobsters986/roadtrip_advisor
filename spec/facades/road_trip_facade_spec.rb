@@ -71,4 +71,49 @@ describe RoadTripFacade do
       end
     end
   end
+
+  describe "#get_arrival_time" do
+    it "returns arrival time, NY to LA" do
+      VCR.use_cassette("arrival_time/la_road_trip_facade_arrival_time") do
+        origin = "New York,NY"
+        destination = "Los Angeles,CA"
+        travel_time = MapquestService.get_travel_info(origin, destination)[:route][:formattedTime]
+        expect(travel_time).to eq("40:18:25")
+
+        road_trip_arrival_time = RoadTripFacade.new(origin, destination).get_arrival_time(travel_time)
+
+        expect(road_trip_arrival_time).to be_a(Time)
+        # expect(road_trip_arrival_time.to_s).to eq("2023-04-27 10:20:43 -0600") ran at 6:02pm on 4/25/2023
+      end
+    end
+
+    it "returns arrival time, New York,NY to Panama City,Panama" do
+      VCR.use_cassette("arrival_time/panama_road_trip_facade_arrival_time") do
+        origin = "New York,NY"
+        destination = "Panama City,Panama"
+        travel_time = MapquestService.get_travel_info(origin, destination)[:route][:formattedTime]
+        expect(travel_time).to eq("80:32:14")
+
+        road_trip_arrival_time = RoadTripFacade.new(origin, destination).get_arrival_time(travel_time)
+
+        expect(road_trip_arrival_time).to be_a(Time)
+        # expect(road_trip_arrival_time.to_s).to eq("2023-04-29 02:35:04 -0600") ran at 6:03pm on 4/25/2023
+      end
+    end
+
+    it "returns arrival time, Denver,CO to Pueblo,CO" do
+      VCR.use_cassette("arrival_time/pueblo_road_trip_facade_arrival_time") do
+        origin = "Denver,CO"
+        destination = "Pueblo,CO"
+        travel_time = MapquestService.get_travel_info(origin, destination)[:route][:formattedTime]
+        expect(travel_time).to eq("01:43:03")
+
+        road_trip_arrival_time = RoadTripFacade.new(origin, destination).get_arrival_time(travel_time)
+
+        expect(road_trip_arrival_time).to be_a(Time)
+        # expect(road_trip_arrival_time.to_s).to eq("2023-04-25 19:48:37 -0600") ran at 6:05pm on 4/25/2023
+      end
+    end
+  end
+
 end
