@@ -65,7 +65,7 @@ The learning goals for this project were;
 
 ### Built With
 
-[![Rails]][Rails-url][![PostgreSQL]][PostgreSQL-url][![Puma]][Puma-url][![bcrypt]][bcrypt-url][![Faraday]][Faraday-url][![Figaro]][Figaro-url][![JSON-Serializer]][JSON-Serializer-url][![Capybara]][Capybara-url][![RSpec]][RSpec-url][![Shoulda-Matchers]][Shoulda-Matchers-url][![VCR]][VCR-url][![Web-mock]][Web-mock-url]
+[![Rails]][Rails-url][![PostgreSQL]][PostgreSQL-url][![Puma]][Puma-url][![bcrypt]][bcrypt-url][![Faraday]][Faraday-url][![Figaro]][Figaro-url][![JSON-Serializer]][JSON-Serializer-url][![Capybara]][Capybara-url][![Shoulda-Matchers]][Shoulda-Matchers-url][![RSpec]][RSpec-url][![VCR]][VCR-url][![Web-mock]][Web-mock-url]
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -90,7 +90,7 @@ The learning goals for this project were;
 
 _Follow the steps below to install and set up this app._
 
-1. NEEDS a TWO API Keys. Sign uo for your free API Keys at [MapQuest’s Geocoding API](https://developer.mapquest.com/documentation/geocoding-api/) and [Weather API](https://www.weatherapi.com/)
+1. NEEDS TWO API Keys. Sign up for your free API Keys at [MapQuest’s Geocoding API](https://developer.mapquest.com/documentation/geocoding-api/) and [Weather API](https://www.weatherapi.com/)
 2. Clone this Repository
    ```sh
    git clone https://github.com/Bobsters986/psydiary_back_end
