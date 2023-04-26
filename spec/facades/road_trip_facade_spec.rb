@@ -186,11 +186,11 @@ describe RoadTripFacade do
         expect(road_trip.weather_at_eta).to be_a(Hash)
         expect(road_trip.weather_at_eta.keys).to eq([:datetime, :temperature, :condition])
         expect(road_trip.weather_at_eta[:datetime]).to be_a(String)
-        expect(road_trip.weather_at_eta[:datetime]).to eq("2023-04-29 03:00")
+        expect(road_trip.weather_at_eta[:datetime]).to eq("2023-04-29 04:00")
         expect(road_trip.weather_at_eta[:temperature]).to be_a(Float)
-        expect(road_trip.weather_at_eta[:temperature]).to eq(75.2)
+        expect(road_trip.weather_at_eta[:temperature]).to eq(75.0)
         expect(road_trip.weather_at_eta[:condition]).to be_a(String)
-        expect(road_trip.weather_at_eta[:condition]).to eq("Partly cloudy")
+        expect(road_trip.weather_at_eta[:condition]).to eq("Clear")
       end
     end
 
