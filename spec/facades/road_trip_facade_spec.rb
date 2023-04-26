@@ -116,4 +116,29 @@ describe RoadTripFacade do
     end
   end
 
+  describe "#create_weather_hash" do
+    it "returns a weather hash of specific attributes for the destination, NY to LA" do
+      VCR.use_cassette("create_weather_hash/la_road_trip_facade_create_weather_hash") do
+        origin = "New York,NY"
+        destination = "Los Angeles,CA"
+        # travel_time = MapquestService.get_travel_info(origin, destination)[:route][:formattedTime]
+        # expect(travel_time).to eq("40:14:00")
+
+        weather_at_destination = RoadTripFacade.new(origin, destination).forecast_at_destination
+        weather_info = weather_at_destination[:forecast][:forecastday][2][:hour][11]
+
+        road_trip_weather_hash = RoadTripFacade.new(origin, destination).create_weather_hash(weather_info)
+
+        expect(road_trip_weather_hash).to be_a(Hash)
+        expect(road_trip_weather_hash.keys).to eq([:datetime, :temperature, :condition])
+        expect(road_trip_weather_hash[:datetime]).to be_a(String)
+        expect(road_trip_weather_hash[:datetime]).to eq("2023-04-27 11:00")
+        expect(road_trip_weather_hash[:temperature]).to be_a(Float)
+        expect(road_trip_weather_hash[:temperature]).to eq(81.1)
+        expect(road_trip_weather_hash[:condition]).to be_a(String)
+        expect(road_trip_weather_hash[:condition]).to eq("Sunny")
+      end
+    end
+  end
+
 end

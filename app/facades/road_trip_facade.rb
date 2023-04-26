@@ -36,7 +36,7 @@ class RoadTripFacade
     WeatherService.forecast(lat, lng)
   end
 
-  def days_of_travel(travel_time)
+  def days_of_travel(travel_time) #unnecessary method now, still tested
     time = travel_time.split(":")
     trip_hours = time[0].to_i
     trip_days = (trip_hours / 24).to_i
@@ -54,7 +54,7 @@ class RoadTripFacade
     {
       datetime: arrival_weather[:time],
       temperature: arrival_weather[:temp_f],
-      conditions: arrival_weather[:condition][:text]
+      condition: arrival_weather[:condition][:text]
     }
   end
 
